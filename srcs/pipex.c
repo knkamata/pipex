@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 21:52:18 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/17 14:30:51 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/17 14:49:39 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	open_file(char *file, t_open flag)
 	if (flag == FT_RDONLY)
 		fd = open(file, O_RDONLY);
 	if (fd == -1)
-		error_byname("open");
+		error_nofile();
 	return (fd);
 }
 
