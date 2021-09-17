@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 07:38:21 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/18 07:41:01 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/18 08:48:16 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ static int	open_file(char *file, t_open flag)
 	int	fd;
 
 	fd = 0;
-	if (flag == FT_APPEND)
+	if (flag == APPEND)
 		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	if (flag == FT_TRUNC)
+	if (flag == TRUNC)
 		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (flag == FT_RDONLY)
+	if (flag == RDONLY)
 		fd = open(file, O_RDONLY);
 	if (fd == -1)
 		error_nofile();
@@ -84,17 +84,17 @@ static int	open_file(char *file, t_open flag)
 void	here_doc(int argc, char *argv[], t_index *index)
 {
 	index->command = 3;
-	index->final = open_file(argv[argc - 1], FT_APPEND);
+	index->final = open_file(argv[argc - 1], APPEND);
 	init_heredoc(argc, argv[2]);
 }
 
 void	multiples(int argc, char *argv[], t_index *index)
 {
 	index->command = 2;
-	index->start = open_file(argv[1], FT_RDONLY);
+	index->start = open_file(argv[1], RDONLY);
 	if (index->start > 0)
 		dup2(index->start, STDIN_FILENO);
 	else
 		index->command++;
-	index->final = open_file(argv[argc - 1], FT_TRUNC);
+	index->final = open_file(argv[argc - 1], TRUNC);
 }

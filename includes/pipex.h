@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 13:47:23 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/18 07:40:27 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/18 08:47:44 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ typedef enum e_error
 
 typedef enum e_open
 {
-	FT_APPEND,
-	FT_TRUNC,
-	FT_RDONLY,
+	APPEND,
+	TRUNC,
+	RDONLY,
 }	t_open;
 
 typedef struct e_index
