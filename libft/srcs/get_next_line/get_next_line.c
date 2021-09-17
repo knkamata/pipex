@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 08:39:13 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/09 19:48:40 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/16 14:05:39 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ char	*get_next_line(int fd)
 	char			*res;
 	int				status;
 
-	if (fd < 0 || BUFFER_SIZE <=0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	target = setfd(&fdlst, fd);
 	if (!target)

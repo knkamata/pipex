@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 13:47:23 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/10 22:38:04 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/17 14:26:34 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 // +------------------------------------------+ //
 # include "../libft/includes/libft.h"
 # include "../libft/includes/get_next_line.h"
+# include "../libft/includes/ft_printf.h"
 
 // +------------------------------------------+ //
 //   Includes                                   //
@@ -34,11 +35,18 @@
 // +------------------------------------------+ //
 //   Type definition                            //
 // +------------------------------------------+ //
-typedef enum e_bool
+typedef enum e_error
 {
-	FALSE,
-	TRUE,
-}	t_bool;
+	FT_SUCCESS,
+	FT_ERROR,
+}	t_error;
+
+typedef enum e_open
+{
+	FT_APPEND,
+	FT_TRUNC,
+	FT_RDONLY,
+}	t_open;
 
 // +------------------------------------------+ //
 //   Prototypes                                 //
@@ -51,8 +59,9 @@ void	exec_cmd(char *argv, char *envp[]);
 // +------------------------------------------+ //
 //   - error.c                                  //
 // +------------------------------------------+ //
-t_bool	error_argc(void);
-t_bool	error_notcmd(void);
-t_bool	error_byname(char *name);
+t_error	error_argc(void);
+t_error	error_nofile(void);
+t_error	error_notcmd(void);
+t_error	error_byname(char *name);
 
 #endif
