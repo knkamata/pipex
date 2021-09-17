@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 21:52:18 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/17 14:49:39 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/17 15:50:30 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	child_cmd(char *argv, char *envp[])
 		close(fd[1]);
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
-		waitpid(pid, NULL, 0);
+		waitpid(-1, NULL, WNOHANG);
 	}
 }
 
