@@ -23,8 +23,9 @@ SRCDIR		= ./srcs/
 
 ##### Source files
 
-SRCS		= $(SRCDIR)pipex.c \
-			  $(SRCDIR)utils.c \
+SRCS		= $(SRCDIR)main.c \
+			  $(SRCDIR)init.c \
+			  $(SRCDIR)exec.c \
 			  $(SRCDIR)error.c
 
 ##### Object files

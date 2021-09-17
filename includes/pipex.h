@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 13:47:23 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/17 14:26:34 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/18 07:40:27 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@
 // +------------------------------------------+ //
 typedef enum e_error
 {
-	FT_SUCCESS,
-	FT_ERROR,
+	ERRSTAT_GENERAL = 1,
+	ERRSTAT_NOTCMD = 127,
 }	t_error;
 
 typedef enum e_open
@@ -48,13 +48,27 @@ typedef enum e_open
 	FT_RDONLY,
 }	t_open;
 
+typedef struct e_index
+{
+	int	start;
+	int	final;
+	int	command;
+}	t_index;
+
 // +------------------------------------------+ //
 //   Prototypes                                 //
 // +------------------------------------------+ //
-//   - utils.c                                  //
+//   - init.c                                   //
+// +------------------------------------------+ //
+void	here_doc(int argc, char *argv[], t_index *index);
+void	multiples(int argc, char *argv[], t_index *index);
+
+// +------------------------------------------+ //
+//   - exec.c                                   //
 // +------------------------------------------+ //
 char	*find_path(char *cmd, char **envp);
 void	exec_cmd(char *argv, char *envp[]);
+void	child_cmd(char *argv, char *envp[]);
 
 // +------------------------------------------+ //
 //   - error.c                                  //

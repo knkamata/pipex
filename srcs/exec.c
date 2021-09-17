@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 20:49:20 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/17 14:32:45 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/18 07:30:51 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,30 @@ void	exec_cmd(char *argv, char *envp[])
 			exit(error_notcmd());
 	if (execve(find_path(cmd[0], envp), cmd, envp) == -1)
 		exit(error_notcmd());
+}
+
+void	child_cmd(char *argv, char *envp[])
+{
+	pid_t	pid;
+	int		fd[2];
+
+	if (pipe(fd) == -1)
+		error_byname("pipe");
+	pid = fork();
+	if (pid == -1)
+		error_byname("fork");
+	if (pid == 0)
+	{
+		close(fd[0]);
+		dup2(fd[1], STDOUT_FILENO);
+		close(fd[1]);
+		exec_cmd(argv, envp);
+	}
+	else
+	{
+		close(fd[1]);
+		dup2(fd[0], STDIN_FILENO);
+		close(fd[0]);
+		waitpid(-1, NULL, WNOHANG);
+	}
 }
