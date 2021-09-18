@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 07:38:21 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/18 09:57:43 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/18 12:09:14 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ static int	open_file(char *file, t_open flag)
 
 	fd = 0;
 	if (flag == APPEND)
-		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		fd = open(file, O_WRONLY | O_CREAT | O_APPEND | O_CLOEXEC, 0644);
 	if (flag == TRUNC)
-		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC | O_CLOEXEC, 0644);
 	if (flag == RDONLY)
-		fd = open(file, O_RDONLY);
+		fd = open(file, O_RDONLY | O_CLOEXEC);
 	if (fd == -1)
 		error_nofile();
 	return (fd);
