@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 13:47:23 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/18 09:46:20 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/18 12:22:36 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	multiples(int argc, char *argv[], t_index *index);
 // +------------------------------------------+ //
 //   - exec.c                                   //
 // +------------------------------------------+ //
-char	*find_path(char *cmd, char **envp);
 void	exec_cmd(char *argv, char *envp[]);
 void	child_cmd(char *argv, char *envp[]);
 
