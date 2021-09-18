@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 20:49:20 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/18 07:30:51 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/18 09:47:24 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ char	*find_path(char *cmd, char **envp)
 	{
 		tmp = ft_strjoin(paths[i], "/");
 		path = ft_strjoin(tmp, cmd);
-		free(tmp);
+		free_util(tmp);
 		if (access(path, F_OK) == 0)
 			return (path);
 		else
-			free(path);
+			free_util(path);
 		i++;
 	}
-	return (0);
+	return (NULL);
 }
 
 void	exec_cmd(char *argv, char *envp[])
@@ -67,16 +67,16 @@ void	child_cmd(char *argv, char *envp[])
 		error_byname("fork");
 	if (pid == 0)
 	{
-		close(fd[0]);
-		dup2(fd[1], STDOUT_FILENO);
-		close(fd[1]);
+		close_util(fd[0]);
+		dup2_util(fd[1], STDOUT_FILENO);
+		close_util(fd[1]);
 		exec_cmd(argv, envp);
 	}
 	else
 	{
-		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[0]);
+		close_util(fd[1]);
+		dup2_util(fd[0], STDIN_FILENO);
+		close_util(fd[0]);
 		waitpid(-1, NULL, WNOHANG);
 	}
 }

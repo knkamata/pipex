@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 21:52:18 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/18 08:41:43 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/18 09:52:48 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char *argv[], char *envp[])
 	while (index.command < argc - 2)
 		child_cmd(argv[index.command++], envp);
 	if (index.final > 0)
-		dup2(index.final, STDOUT_FILENO);
+		dup2_util(index.final, STDOUT_FILENO);
 	exec_cmd(argv[argc - 2], envp);
 	return (0);
 }

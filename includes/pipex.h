@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 13:47:23 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/18 08:47:44 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/18 09:46:20 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,12 @@ t_error	error_argc(void);
 t_error	error_nofile(void);
 t_error	error_notcmd(void);
 t_error	error_byname(char *name);
+
+// +------------------------------------------+ //
+//   - utils.c                                  //
+// +------------------------------------------+ //
+void	close_util(int fd);
+void	dup2_util(int fd1, int fd2);
+void	free_util(void *ptr);
 
 #endif

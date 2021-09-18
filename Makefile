@@ -26,7 +26,8 @@ SRCDIR		= ./srcs/
 SRCS		= $(SRCDIR)main.c \
 			  $(SRCDIR)init.c \
 			  $(SRCDIR)exec.c \
-			  $(SRCDIR)error.c
+			  $(SRCDIR)error.c \
+			  $(SRCDIR)utils.c
 
 ##### Object files
 

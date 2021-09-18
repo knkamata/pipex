@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 07:38:21 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/18 08:48:16 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/18 09:57:43 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,17 @@ static void	write2pipe(char *limiter, int *fd)
 		line = get_next_line(STDIN_FILENO);
 		if (!line)
 		{
-			close(fd[1]);
+			close_util(fd[1]);
 			exit(EXIT_FAILURE);
 		}
 		if (line[limiter_length] == '\n' && \
 			!ft_strncmp(line, limiter, limiter_length))
 		{
-			close(fd[1]);
+			close_util(fd[1]);
 			exit(EXIT_SUCCESS);
 		}
 		ft_putstr_fd(line, fd[1]);
-		free(line);
-		line = NULL;
+		free_util(line);
 	}
 }
 
@@ -53,14 +52,14 @@ static void	init_heredoc(int argc, char *limiter)
 		error_byname("fork");
 	if (pid == 0)
 	{
-		close(fd[0]);
+		close_util(fd[0]);
 		write2pipe(limiter, fd);
 	}
 	else
 	{
-		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[0]);
+		close_util(fd[1]);
+		dup2_util(fd[0], STDIN_FILENO);
+		close_util(fd[0]);
 		waitpid(pid, NULL, 0);
 	}
 }
@@ -93,7 +92,7 @@ void	multiples(int argc, char *argv[], t_index *index)
 	index->command = 2;
 	index->start = open_file(argv[1], RDONLY);
 	if (index->start > 0)
-		dup2(index->start, STDIN_FILENO);
+		dup2_util(index->start, STDIN_FILENO);
 	else
 		index->command++;
 	index->final = open_file(argv[argc - 1], TRUNC);
