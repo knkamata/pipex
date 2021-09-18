@@ -6,11 +6,24 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 20:49:20 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/18 09:47:24 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/18 10:31:51 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+static void	free_paths(char **paths)
+{
+	size_t	i;
+
+	i = 0;
+	while (paths[i])
+	{
+		free_util(paths[i]);
+		i++;
+	}
+	free_util(paths);
+}
 
 char	*find_path(char *cmd, char **envp)
 {
@@ -33,11 +46,15 @@ char	*find_path(char *cmd, char **envp)
 		path = ft_strjoin(tmp, cmd);
 		free_util(tmp);
 		if (access(path, F_OK) == 0)
+		{
+			free_paths(paths);
 			return (path);
+		}
 		else
 			free_util(path);
 		i++;
 	}
+	free_paths(paths);
 	return (NULL);
 }
 
