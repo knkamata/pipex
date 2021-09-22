@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 13:47:23 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/18 12:22:36 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/22 16:16:11 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef enum e_open
 	RDONLY,
 }	t_open;
 
-typedef struct e_index
+typedef struct s_index
 {
 	int	start;
 	int	final;
