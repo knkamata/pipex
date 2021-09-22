@@ -20,8 +20,8 @@ $ ./pipex here_doc <LIMITER> <cmd1> <cmd2> <file>
 ```
 
 ## Description
-- Available as many commands as you want between the input/output files
-- Available commands specified by the path
+- Allowed as many commands as you want between the input/output files
+- Allowed for commands specified by the path
 - Avoided pipe blocking in concurrency
 - Set exit status `1` for a general error and `127` for not command found
 - Set close-on-flag to opened file descriptors
