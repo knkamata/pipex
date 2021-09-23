@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 21:52:18 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/23 16:20:30 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/23 20:19:40 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ int	main(int argc, char *argv[], char *envp[])
 	}
 	while (cmd_index < argc - 2)
 		child_cmd(argv[cmd_index++], envp, files);
-	if (files.output > 0)
-		dup2_util(files.output, STDOUT_FILENO);
+	if (files.output == -1)
+		exit(EXIT_FAILURE);
+	dup2_util(files.output, STDOUT_FILENO);
 	exec_cmd(argv[argc - 2], envp);
-	return (0);
 }
