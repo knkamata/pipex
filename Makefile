@@ -28,9 +28,15 @@ SRCS		= $(SRCDIR)pipex.c \
 			  $(SRCDIR)error.c \
 			  $(SRCDIR)utils.c
 
+SRCS_B		= $(SRCDIR)pipex_bonus.c \
+			  $(SRCDIR)exec_bonus.c \
+			  $(SRCDIR)error_bonus.c \
+			  $(SRCDIR)utils_bonus.c
+
 ##### Object files
 
 OBJS		= $(SRCS:.c=.o)
+OBJS_B		= $(SRCS_B:.c=.o)
 
 ############################################################
 ### Library
@@ -48,18 +54,20 @@ LIBFT		= -L$(LIBFTPATH) -lft
 
 all: $(NAME)
 
-bonus: $(NAME)
-
 $(NAME): $(OBJS)
 	$(LIBFTMAKE)
 	$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJS) $(LIBFT)
+
+bonus: $(OBJS_B)
+	$(LIBFTMAKE)
+	$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJS_B) $(LIBFT)
 
 .c.o:
 	$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $<
 
 clean:
 	$(LIBFTMAKE) clean
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(OBJS_B)
 
 fclean: clean
 	$(LIBFTMAKE) fclean
