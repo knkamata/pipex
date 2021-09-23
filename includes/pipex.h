@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 13:47:23 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/22 16:16:11 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/23 16:18:55 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 // +------------------------------------------+ //
 //   Libft                                      //
 // +------------------------------------------+ //
+
 # include "../libft/includes/libft.h"
 # include "../libft/includes/get_next_line.h"
 # include "../libft/includes/ft_printf.h"
@@ -23,11 +24,13 @@
 // +------------------------------------------+ //
 //   Includes                                   //
 // +------------------------------------------+ //
+
 # include "msgs.h"
 
 // +------------------------------------------+ //
 //   System header files                        //
 // +------------------------------------------+ //
+
 # include <fcntl.h>
 # include <stdio.h>
 # include <sys/wait.h>
@@ -35,6 +38,7 @@
 // +------------------------------------------+ //
 //   Type definition                            //
 // +------------------------------------------+ //
+
 typedef enum e_error
 {
 	ERRSTAT_GENERAL = 1,
@@ -48,39 +52,35 @@ typedef enum e_open
 	RDONLY,
 }	t_open;
 
-typedef struct s_index
+typedef struct s_files
 {
-	int	start;
-	int	final;
-	int	command;
-}	t_index;
+	int	input;
+	int	output;
+}	t_files;
 
 // +------------------------------------------+ //
 //   Prototypes                                 //
 // +------------------------------------------+ //
-//   - init.c                                   //
-// +------------------------------------------+ //
-void	here_doc(int argc, char *argv[], t_index *index);
-void	multiples(int argc, char *argv[], t_index *index);
-
-// +------------------------------------------+ //
 //   - exec.c                                   //
 // +------------------------------------------+ //
+
 void	exec_cmd(char *argv, char *envp[]);
-void	child_cmd(char *argv, char *envp[]);
+void	child_cmd(char *argv, char *envp[], t_files files);
 
 // +------------------------------------------+ //
 //   - error.c                                  //
 // +------------------------------------------+ //
+
 t_error	error_argc(void);
-t_error	error_nofile(void);
-t_error	error_notcmd(void);
+t_error	error_nofile(char *file);
+t_error	error_notcmd(char *cmd);
 t_error	error_byname(char *name);
 
 // +------------------------------------------+ //
 //   - utils.c                                  //
 // +------------------------------------------+ //
-void	close_util(int fd);
+
+void	close_util(int fd[2]);
 void	dup2_util(int fd1, int fd2);
 void	free_util(void *ptr);
 
