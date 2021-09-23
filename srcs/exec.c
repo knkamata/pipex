@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 20:49:20 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/18 12:38:03 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/23 16:21:03 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,12 @@ void	exec_cmd(char *argv, char *envp[])
 		exit(error_byname("ft_split"));
 	if (ft_strchr(cmd[0], '/'))
 		if (execve(cmd[0], &cmd[0], envp) == -1)
-			exit(error_notcmd());
+			exit(error_notcmd(cmd[0]));
 	if (execve(parse_path(cmd[0], envp), cmd, envp) == -1)
-		exit(error_notcmd());
+		exit(error_notcmd(cmd[0]));
 }
 
-void	child_cmd(char *argv, char *envp[])
+void	child_cmd(char *argv, char *envp[], t_files files)
 {
 	pid_t	pid;
 	int		fd[2];
@@ -90,16 +90,16 @@ void	child_cmd(char *argv, char *envp[])
 		error_byname("fork");
 	if (pid == 0)
 	{
-		close_util(fd[0]);
+		if (files.input == -1)
+		{
+			close_util(fd);
+			exit(EXIT_FAILURE);
+		}
 		dup2_util(fd[1], STDOUT_FILENO);
-		close_util(fd[1]);
+		close_util(fd);
 		exec_cmd(argv, envp);
 	}
-	else
-	{
-		close_util(fd[1]);
-		dup2_util(fd[0], STDIN_FILENO);
-		close_util(fd[0]);
-		waitpid(-1, NULL, WNOHANG);
-	}
+	dup2_util(fd[0], STDIN_FILENO);
+	close_util(fd);
+	waitpid(-1, NULL, WNOHANG);
 }
