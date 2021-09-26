@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 20:49:20 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/23 16:21:03 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/26 20:12:55 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ static char	*find_command(char *cmd, char **paths)
 	return (NULL);
 }
 
-static char	*parse_path(char *cmd, char **envp)
+static char	*parse_path(char *cmd, char *envp[])
 {
 	char	**paths;
 	size_t	i;
 
 	i = 0;
-	while (!ft_strstr(envp[i], "PATH"))
+	while (envp[i] != NULL && ft_strncmp(envp[i], "PATH=", 5))
 		i++;
 	paths = ft_split(envp[i] + 5, ':');
 	if (!paths)
@@ -68,10 +68,12 @@ void	exec_cmd(char *argv, char *envp[])
 {
 	char	**cmd;
 
+	if (*argv == '\0')
+		exit(error_noperm(""));
 	cmd = ft_split(argv, ' ');
 	if (!cmd)
 		exit(error_byname("ft_split"));
-	if (ft_strchr(cmd[0], '/'))
+	if (cmd[0] != NULL && ft_strchr(cmd[0], '/'))
 		if (execve(cmd[0], &cmd[0], envp) == -1)
 			exit(error_notcmd(cmd[0]));
 	if (execve(parse_path(cmd[0], envp), cmd, envp) == -1)
