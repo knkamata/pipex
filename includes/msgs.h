@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 21:31:02 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/23 16:15:32 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/26 18:33:05 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@
 # define ERRMSG_USAGE2 "Usage: ./pipex here_doc LIMITER <cmd1> <cmd2> <file>"
 # define ERRMSG_NOTCMD "Error: command not found: "
 # define ERRMSG_NOFILE "Error: no such file or directory: "
+# define ERRMSG_NOPERM "Error: permission denied: "
 
 #endif
