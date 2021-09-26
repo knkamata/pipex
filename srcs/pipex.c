@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 21:52:18 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/26 19:12:22 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/26 21:37:36 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	write2pipe(char *limiter, int fd[2])
 			close_util(fd);
 			exit(EXIT_FAILURE);
 		}
-		if (line[limiter_length] == '\n' && limiter != NULL && \
+		if (line[limiter_length] == '\n' && limiter && \
 			!ft_strncmp(line, limiter, limiter_length))
 		{
 			close_util(fd);
@@ -85,7 +85,7 @@ int	main(int argc, char *argv[], char *envp[])
 
 	if (!(argc >= 5))
 		return (error_argc());
-	if (argv[1] != NULL && !ft_strncmp(argv[1], "here_doc", 8) && argv[1][8] == '\0')
+	if (argv[1] && !ft_strncmp(argv[1], "here_doc", 8) && argv[1][8] == '\0')
 	{
 		cmd_index = 3;
 		here_doc(argc, argv);

@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 20:49:20 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/26 20:46:45 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/26 21:34:26 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ static char	*parse_path(char *cmd, char *envp[])
 	size_t	i;
 
 	i = 0;
-	while (envp[i] != NULL && ft_strncmp(envp[i], "PATH=", 5))
+	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5))
 		i++;
-	if (envp[i] == NULL)
+	if (!envp[i])
 		return (NULL);
 	paths = ft_split(envp[i] + 5, ':');
 	if (!paths)
@@ -70,12 +70,12 @@ void	exec_cmd(char *argv, char *envp[])
 {
 	char	**cmd;
 
-	if (*argv == '\0')
+	if (!*argv)
 		exit(error_noperm(""));
 	cmd = ft_split(argv, ' ');
 	if (!cmd)
 		exit(error_byname("ft_split"));
-	if (cmd[0] != NULL && ft_strchr(cmd[0], '/'))
+	if (cmd[0] && ft_strchr(cmd[0], '/'))
 		if (execve(cmd[0], &cmd[0], envp) == -1)
 			exit(error_notcmd(cmd[0]));
 	if (execve(parse_path(cmd[0], envp), cmd, envp) == -1)
