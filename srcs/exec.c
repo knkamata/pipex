@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 20:49:20 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/26 20:12:55 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/26 20:46:45 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ static char	*parse_path(char *cmd, char *envp[])
 	i = 0;
 	while (envp[i] != NULL && ft_strncmp(envp[i], "PATH=", 5))
 		i++;
+	if (envp[i] == NULL)
+		return (NULL);
 	paths = ft_split(envp[i] + 5, ':');
 	if (!paths)
 		exit(error_byname("ft_split"));
