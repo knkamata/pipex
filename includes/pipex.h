@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 13:47:23 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/23 16:18:55 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/26 18:34:37 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 typedef enum e_error
 {
 	ERRSTAT_GENERAL = 1,
+	ERRSTAT_NOPERM = 126,
 	ERRSTAT_NOTCMD = 127,
 }	t_error;
 
@@ -74,6 +75,7 @@ void	child_cmd(char *argv, char *envp[], t_files files);
 t_error	error_argc(void);
 t_error	error_nofile(char *file);
 t_error	error_notcmd(char *cmd);
+t_error	error_noperm(char *name);
 t_error	error_byname(char *name);
 
 // +------------------------------------------+ //
