@@ -58,10 +58,6 @@ $(NAME): $(OBJS)
 	$(LIBFTMAKE)
 	$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJS) $(LIBFT)
 
-bonus: $(OBJS_B)
-	$(LIBFTMAKE)
-	$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJS_B) $(LIBFT)
-
 .c.o:
 	$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $<
 
@@ -74,5 +70,9 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+bonus: $(OBJS_B)
+	$(LIBFTMAKE)
+	$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJS_B) $(LIBFT)
 
 ############################################################
