@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 13:47:23 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/26 18:34:37 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/28 14:29:12 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ t_error	error_byname(char *name);
 
 void	close_util(int fd[2]);
 void	dup2_util(int fd1, int fd2);
-void	free_util(void *ptr);
+void	free_char1(char **ptr);
+void	free_char2(char ***ptr);
 
 #endif

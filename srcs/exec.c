@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 20:49:20 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/26 21:34:26 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/28 14:30:44 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static void	free_paths(char **paths)
 	i = 0;
 	while (paths[i])
 	{
-		free_util(paths[i]);
+		free_char1(&paths[i]);
 		i++;
 	}
-	free_util(paths);
+	free_char2(&paths);
 }
 
 static char	*find_command(char *cmd, char **paths)
@@ -36,14 +36,14 @@ static char	*find_command(char *cmd, char **paths)
 	{
 		tmp = ft_strjoin(paths[i], "/");
 		path = ft_strjoin(tmp, cmd);
-		free_util(tmp);
+		free_char1(&tmp);
 		if (access(path, F_OK) == 0)
 		{
 			free_paths(paths);
 			return (path);
 		}
 		else
-			free_util(path);
+			free_char1(&path);
 		i++;
 	}
 	free_paths(paths);

@@ -30,8 +30,14 @@ void	dup2_util(int fd1, int fd2)
 		exit(error_byname("dup2"));
 }
 
-void	free_util(void *ptr)
+void	free_char1(char **ptr)
 {
-	free(ptr);
-	ptr = NULL;
+	free(*ptr);
+	*ptr = NULL;
+}
+
+void	free_char2(char ***ptr)
+{
+	free(**ptr);
+	**ptr = NULL;
 }

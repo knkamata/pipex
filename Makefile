@@ -8,7 +8,6 @@ NAME		= pipex
 
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
-RM			= rm -f
 
 ############################################################
 ### Includes
@@ -28,18 +27,9 @@ SRCS		= $(SRCDIR)pipex.c \
 			  $(SRCDIR)error.c \
 			  $(SRCDIR)utils.c
 
-SRCS_B		= $(SRCDIR)pipex_bonus.c \
-			  $(SRCDIR)exec_bonus.c \
-			  $(SRCDIR)error_bonus.c \
-			  $(SRCDIR)utils_bonus.c
-
 ##### Object files
 
 OBJS		= $(SRCS:.c=.o)
-OBJS_B		= $(SRCS_B:.c=.o)
-ifdef BONUS
-OBJS		= $(OBJS_B)
-endif
 
 ############################################################
 ### Library
@@ -50,7 +40,7 @@ LIBFT		= -L$(LIBFTPATH) -lft
 
 ############################################################
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
 
 ############################################################
 ### Rules
@@ -73,8 +63,5 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
-
-bonus:
-	make BONUS=1
 
 ############################################################

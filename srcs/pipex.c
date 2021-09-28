@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 21:52:18 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/26 21:37:36 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/09/28 14:29:37 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	write2pipe(char *limiter, int fd[2])
 			exit(EXIT_SUCCESS);
 		}
 		ft_putstr_fd(line, fd[1]);
-		free_util(line);
+		free_char1(&line);
 	}
 }
 
