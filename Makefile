@@ -37,6 +37,9 @@ SRCS_B		= $(SRCDIR)pipex_bonus.c \
 
 OBJS		= $(SRCS:.c=.o)
 OBJS_B		= $(SRCS_B:.c=.o)
+ifdef BONUS
+OBJS		= $(OBJS_B)
+endif
 
 ############################################################
 ### Library
@@ -71,8 +74,7 @@ fclean: clean
 
 re: fclean all
 
-bonus: $(OBJS_B)
-	$(LIBFTMAKE)
-	$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJS_B) $(LIBFT)
+bonus:
+	make BONUS=1
 
 ############################################################
