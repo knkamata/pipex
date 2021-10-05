@@ -56,7 +56,7 @@ $(NAME): $(OBJS)
 
 clean:
 	$(LIBFTMAKE) clean
-	$(RM) $(OBJS) $(OBJS_B)
+	$(RM) $(OBJS)
 
 fclean: clean
 	$(LIBFTMAKE) fclean
