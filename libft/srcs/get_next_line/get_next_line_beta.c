@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_beta.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 08:39:13 by kkamata           #+#    #+#             */
-/*   Updated: 2021/10/06 13:36:52 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/10/06 13:59:27 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_gnl	return_new_line(t_fd *target, char *nptr, char **res)
 
 	if (nptr)
 	{
-		*res = ft_strndup(target->content, nptr - (target->content) + 1);
+		*res = ft_strndup(target->content, nptr - (target->content));
 		tmp = ft_strndup(nptr + 1, ft_strlen(nptr + 1));
 		if (!*res || !tmp)
 			return (GNLERR);
@@ -68,28 +68,24 @@ static t_gnl	readfd(t_fd *target, char *buf, char **res)
 	return (return_new_line(target, nptr, res));
 }
 
-char	*get_next_line(int fd)
+int	get_next_line_beta(int fd, char **line)
 {
 	static t_fd		*fdlst;
 	t_fd			*target;
 	char			*buf;
-	char			*res;
 	int				status;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
+	if (fd < 0 || !line || BUFFER_SIZE <= 0)
+		return (GNLERR);
 	target = setfd(&fdlst, fd);
 	if (!target)
-		return (NULL);
+		return (GNLERR);
 	buf = (char *)malloc((size_t)BUFFER_SIZE + 1);
 	if (!buf)
-		return (NULL);
-	res = NULL;
-	status = readfd(target, buf, &res);
+		return (GNLERR);
+	status = readfd(target, buf, line);
 	free(buf);
-	if (status == GNLEOF || status == GNLERR)
+	if (status <= 0)
 		clearfd(&fdlst, target);
-	if (status == GNLERR)
-		return (NULL);
-	return (res);
+	return (status);
 }

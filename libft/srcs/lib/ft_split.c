@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 11:48:33 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/06 14:31:12 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/10/07 13:59:07 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ static void	ft_arrclear(char **arr)
 
 	i = 0;
 	while (arr[i])
-	{
 		free(arr[i++]);
-		i++;
-	}
 	free(arr);
 }
 

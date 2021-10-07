@@ -6,7 +6,7 @@
 /*   By: kkamata <kkamata@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 08:39:59 by kkamata           #+#    #+#             */
-/*   Updated: 2021/09/28 14:35:30 by kkamata          ###   ########.fr       */
+/*   Updated: 2021/10/06 13:49:27 by kkamata          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,19 @@
 #  define BUFFER_SIZE 256
 # endif
 
-# define SUCCESS 1
-# define ENDOFFILE 0
-# define ERROR -1
+// +------------------------------------------+ //
+//   Enum definition                            //
+// +------------------------------------------+ //
+
+typedef enum e_gnl
+{
+	GNLSUC = 1,
+	GNLEOF = 0,
+	GNLERR = -1,
+}	t_gnl;
 
 // +------------------------------------------+ //
-//   Type definition                            //
+//   Struct definition                          //
 // +------------------------------------------+ //
 
 typedef struct s_fd
@@ -51,9 +58,18 @@ typedef struct s_fd
 char	*get_next_line(int fd);
 
 // +------------------------------------------+ //
+//   get_next_line_beta.c                       //
+// +------------------------------------------+ //
+
+// Returns 1 (SUCCESS), 0 (EOF), -1 (ERROR) and sets a line read until before \n
+int		get_next_line_beta(int fd, char **line);
+
+// +------------------------------------------+ //
 //   get_next_line_utils.c                      //
 // +------------------------------------------+ //
 
+t_fd	*newfd(int fd);
+t_fd	*setfd(t_fd **fdlst, int fd);
 void	clearfd(t_fd **fdlst, t_fd *target);
 
 #endif
